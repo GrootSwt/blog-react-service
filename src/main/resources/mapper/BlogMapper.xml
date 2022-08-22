@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.business.mapper.BlogMapper">
+    <resultMap id="BlogMap" type="com.blog.business.entity.Blog">
+        <id column="id" property="id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="lastUpdateTime" column="last_update_time"/>
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <result property="content" column="content"/>
+        <collection property="blogTags" column="{blogId=id}"
+                    select="com.blog.business.mapper.BlogTagMapper.selectByBlogId"/>
+    </resultMap>
+    <select id="pageableSearch" resultMap="BlogMap">
+        select b.*
+        from blog b
+        join blog_tag bt
+        on b.id = bt.blog_id
+        <where>
+            <if test="searchData.params.title != null">
+                <bind name="title" value="'%' + searchData.params.title + '%'"/>
+                and b.title like #{title}
+            </if>
+            <if test="searchData.params.description != null">
+                <bind name="description" value="'%' + searchData.params.description + '%'"/>
+                and b.description like #{description}
+            </if>
+            <if test="searchData.params.tag != null">
+                <bind name="tag" value="'%' + searchData.params.tag + '%'"/>
+                and bt.tag_name like #{tag}
+            </if>
+            <if test="searchData.params.param != null">
+                <bind name="param" value="'%' + searchData.params.param + '%'"/>
+                or b.title like #{param}
+                or b.description like #{param}
+                or bt.tag_name like #{param}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.size}
+    </select>
+    <select id="getBlogById" resultMap="BlogMap">
+        select b.*
+        from blog b
+        <where>
+            and b.id = #{id}
+        </where>
+    </select>
+</mapper>

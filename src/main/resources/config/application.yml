@@ -1,0 +1,15 @@
+server:
+  port: 5555
+spring:
+  application:
+    name: groot-blog-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=GMT
+    username: root
+    password: 123456
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.blog.business.entity
+  mapper-locations: classpath*:/mapper/**/*.xml

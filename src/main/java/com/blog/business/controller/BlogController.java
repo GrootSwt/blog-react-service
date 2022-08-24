@@ -39,4 +39,10 @@ public class BlogController {
         blogDTO = blogConvertor.toDTO(blog);
         return ResultData.success("保存博客成功！", blogDTO);
     }
+
+    @DeleteMapping(value = "{id}/deleteBlogById")
+    public PageResultData<List<BlogDTO>> deleteBlogById(@PathVariable String id) {
+        blogService.deleteById(id);
+        return this.pageableSearchBlog(new SearchData(),new Pageable());
+    }
 }

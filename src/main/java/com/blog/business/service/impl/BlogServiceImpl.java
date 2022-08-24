@@ -63,4 +63,11 @@ public class BlogServiceImpl implements BlogService {
         blogTagService.saveBlogTags(blogTags);
         return getBlogById(blog.getId());
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteById(String id) {
+        blogMapper.deleteById(id);
+        blogTagService.deleteByBlogId(id);
+    }
 }

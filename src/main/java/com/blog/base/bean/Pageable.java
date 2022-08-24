@@ -9,7 +9,7 @@ public class Pageable {
 
     private Integer size = 20;
 
-    private Long offset;
+    private Long offset = 0L;
 
-    private Long total;
+    private Long total = 0L;
 }

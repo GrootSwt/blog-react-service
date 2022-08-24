@@ -12,4 +12,6 @@ public interface BlogService {
     Blog getBlogById(String id);
 
     Blog saveBlog(Blog blog);
+
+    void deleteById(String id);
 }

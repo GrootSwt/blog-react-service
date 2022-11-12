@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.blog</groupId>
-    <artifactId>blog-server</artifactId>
+    <artifactId>blog-react-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>blog-server</name>
-    <description>blog-server</description>
+    <name>blog-react-service</name>
+    <description>blog-react-service</description>
     <properties>
         <java.version>17</java.version>
     </properties>
